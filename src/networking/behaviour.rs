@@ -12,23 +12,17 @@ use libp2p::relay;
 pub struct OloliuhquiBehaviour {
     // Relay
     relay: relay::Behaviour,
-    
     // Identify Protocol
     identify: identify::Behaviour,
-
     // Ping Protocol
     ping: ping::Behaviour,
-
     // KAD
     kad: kad::Behaviour<MemoryStore>,
-
     // Rendezous
     rendezous_server: rendezvous::server::Behaviour,
     rendezous_client: rendezvous::client::Behaviour,
-
     // GossipSub
     gossip: gossipsub::Behaviour,
-
     // Floodsub
     floodsub: floodsub::Floodsub,
 }

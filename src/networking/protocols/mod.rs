@@ -1,7 +1,10 @@
+/// Keyservice
 pub mod keyservice;
 
+/// Liuhq
 pub mod liuhq;
 
+/// ExtensionChain
 pub mod extchain;
 
 /// Transaction Bridger
@@ -12,3 +15,6 @@ pub mod universal;
 
 /// Authority
 pub mod authority;
+
+/// Registar
+pub mod registar;
