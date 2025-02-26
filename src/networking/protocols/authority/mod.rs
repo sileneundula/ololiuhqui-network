@@ -3,8 +3,8 @@ use std::{io, iter, pin::Pin, task::{Context, Poll}};
 
 use futures::prelude::*;
 use libp2p::{
-    core::upgrade::{read_one, write_one, ProtocolName, UpgradeInfo},
-    swarm::{NegotiatedSubstream, NetworkBehaviour, NetworkBehaviourAction, PollParameters, ProtocolsHandler, ProtocolsHandlerEvent, SubstreamProtocol},
+    core::upgrade::{UpgradeInfo, Negotiated as NegotiatedSubstream},
+    swarm::{, NetworkBehaviour, SubstreamProtocol},
     InboundUpgrade, OutboundUpgrade, PeerId,
 };
 

@@ -18,3 +18,9 @@ pub mod authority;
 
 /// Registar
 pub mod registar;
+
+/// Web
+pub mod web;
+
+/// PastyMD
+pub mod pastymd;
