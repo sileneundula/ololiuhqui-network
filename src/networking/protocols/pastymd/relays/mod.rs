@@ -1,7 +1,7 @@
 use libp2p::{
     core::upgrade::{InboundUpgrade, Negotiated as NegotiatedSubstream},
     swarm::NegotiatedSubstream,
-    ProtocolName,
+    core::Protocol,
 };
 
 pub struct PastyMDRelay;
