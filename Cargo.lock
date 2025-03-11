@@ -515,6 +515,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "blake3"
+version = "1.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "675f87afced0413c9bb02843499dbbd3882a237645883f71a2b59644a6d2f753"
+dependencies = [
+ "arrayref",
+ "arrayvec",
+ "cc",
+ "cfg-if",
+ "constant_time_eq",
+]
+
+[[package]]
 name = "block-buffer"
 version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -690,6 +703,12 @@ name = "const-oid"
 version = "0.9.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2459377285ad874054d797f3ccebf984978aa39129f6eafde5cdc8315b612f8"
+
+[[package]]
+name = "constant_time_eq"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7c74b8349d32d297c9134b8c88677813a227df8f779daa29bfc29c183fe3dca6"
 
 [[package]]
 name = "core-foundation"
@@ -2749,19 +2768,23 @@ dependencies = [
 
 [[package]]
 name = "libslug"
-version = "0.2.0"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cff9604b0e60be4400666e88241430894e1886fb4ce1f995fd953a298aff7adb"
+checksum = "69280021694190d1c39901ad69d06fecacb8e34edafd526fca18ef5ed701f8e5"
 dependencies = [
  "aes-gcm",
  "argon2",
  "base32",
  "base58",
+ "blake2",
+ "blake3",
  "chacha20poly1305 0.10.1",
+ "digest 0.10.7",
  "ecies-ed25519-silene",
  "ed25519-dalek",
  "hybrid-array",
  "ml-kem",
+ "morus",
  "pqcrypto-sphincsplus",
  "pqcrypto-traits",
  "rand 0.8.5",
@@ -2771,9 +2794,11 @@ dependencies = [
  "serde-big-array",
  "serde-encrypt",
  "serde_yaml",
+ "sha2 0.10.8",
  "subtle",
  "subtle-encoding",
  "tiny-bip39",
+ "tiny-keccak",
  "zeroize",
 ]
 
@@ -2938,6 +2963,12 @@ dependencies = [
  "thiserror 1.0.69",
  "uuid",
 ]
+
+[[package]]
+name = "morus"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "41a71ad150c58133c46297e050e38f0391aef2932ba3dffcdafece4c7db32963"
 
 [[package]]
 name = "multiaddr"
@@ -4510,6 +4541,15 @@ dependencies = [
  "unicode-normalization",
  "wasm-bindgen",
  "zeroize",
+]
+
+[[package]]
+name = "tiny-keccak"
+version = "2.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2c9d3793400a45f954c52e73d068316d76b6f4e36977e3fcebb13a2721e80237"
+dependencies = [
+ "crunchy",
 ]
 
 [[package]]

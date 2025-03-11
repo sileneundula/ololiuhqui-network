@@ -2,6 +2,7 @@ use libslug::slugcrypt::internals::signature;
 use libslug::slugcrypt::internals::encryption;
 use libslug::slugcrypt::internals::signature::ed25519::ED25519PublicKey;
 use libslug::slugcrypt::internals::signature::ed25519::ED25519SecretKey;
+use libslug::slugcrypt::internals::signature::ed25519::ED25519Signature;
 use libslug::slugcrypt::internals::signature::schnorr::SchnorrPublicKey;
 use libslug::slugcrypt::internals::signature::schnorr::SchnorrSecretKey;
 use libslug::slugcrypt::internals::signature::sphincs_plus::SPHINCSSecretKey;
@@ -12,6 +13,8 @@ use libslug::slugcrypt::internals::encryption::ecies::{ECPublicKey, ECSecretKey}
 pub type Identity = String;
 pub type LocalName = String;
 
+pub mod naive;
+
 use std::collections::HashMap;
 
 pub struct KeyPair {
@@ -21,6 +24,15 @@ pub struct KeyPair {
     pub pk: Vec<u8>,
     pub sk: Vec<u8>,
 }
+
+pub enum KeypairAlgorithms {
+    ED25519,
+    Schnorr,
+    SPHINCSPLUS,
+    
+    ECIES,
+}
+/*
 
 impl KeyPair {
     pub fn new(alg: u8, is_encryption: bool, pk: Vec<u8>, sk: Vec<u8>) -> Self {
@@ -54,11 +66,12 @@ impl KeyPair {
             },
             1 => {
                 let (pk,sk) = self.to_schnorr();
-                sk.sign_with_slugcrypt(msg.as_ref()).to_hex_string()
+                sk.sign_with_slugcrypt(msg.as_ref()).unwrap().to_hex_string().unwrap()
             },
             2 => {
                 let (pk,sk) = self.to_sphincs_plus();
-                sk.sign(msg.as_ref()).to_hex_string()
+                let message = signature::sphincs_plus::;
+                sk.sign(message).unwrap().to_hex_string().unwrap()
             },
             _ => panic!("Invalid algorithm")
         }
@@ -67,11 +80,13 @@ impl KeyPair {
         match self.alg {
             0 => {
                 let (pk,sk) = self.to_ed25519();
-                pk.verify(msg.as_ref(), &signature::ed25519::Signature::from_hex_string(sig)).unwrap()
+                let signature = ED25519Signature::from_hex_string(sig).unwrap();
+                let signature_bytes = ED25519Signature::from_bytes(&signature).unwrap();
+                pk.verify(signature_bytes, msg.as_ref()).unwrap()
             },
             1 => {
                 let (pk,sk) = self.to_schnorr();
-                pk.verify_with_slugcrypt(msg.as_ref(), &sig.from_hex_string()).unwrap()
+                pk.verify_with_context(msg.as_ref(), b"SlugCrypt", SchnorrSignature::from_hex_string(sig).unwrap()).unwrap()
             },
             2 => {
                 let (pk,sk) = self.to_sphincs_plus();
@@ -118,8 +133,8 @@ impl SlabWallet {
     pub fn add_key(&mut self, local_name: LocalName, identity: Identity, wallet: IdentityWallet) {
         self.local_names.push(local_name);
         self.identities.insert(local_name, identity);
-        self.signer_wallets.insert(identity, IdentityWallet::new(algorithm, pk, sk));
-        self.encrypter_wallets.insert(identity, IdentityWallet::new(algorithm, pk, sk));
+        //self.signer_wallets.insert(identity, IdentityWallet::new(algorithm, pk, sk));
+        //self.encrypter_wallets.insert(identity, IdentityWallet::new(algorithm, pk, sk));
     }
 }
 
@@ -129,3 +144,4 @@ impl IdentityWallet {
     }
 
 }
+    */
