@@ -1,5 +1,7 @@
 use libslug::slugcrypt::internals::signature::{ed25519::{ED25519PublicKey, ED25519SecretKey, ED25519Signature}, sphincs_plus::{SPHINCSPublicKey,SPHINCSSecretKey,SPHINCSSignature}};
 use libslug::slugcrypt::internals::messages::Message;
+use libslug::slugcrypt::internals::digest::blake2::SlugBlake2bHasher;
+use libslug::slugcrypt::internals::digest::digest::SlugDigest;
 
 pub struct SigningKeypair {
     pk_sphincs: SPHINCSPublicKey,
@@ -7,6 +9,13 @@ pub struct SigningKeypair {
 
     pk_ed25519: ED25519PublicKey,
     sk_ed25519: ED25519SecretKey,
+
+    fingerprint: String,
+}
+
+pub struct SigningPublicKeys {
+    pk_sphincs: SPHINCSPublicKey,
+    pk_ed25519: ED25519PublicKey,
 }
 
 pub struct Signature {
@@ -19,6 +28,8 @@ impl SigningKeypair {
         let sphincs_keypair = SPHINCSSecretKey::generate();
         let ed25519_secret = ED25519SecretKey::generate();
         let ed25519_public = ed25519_secret.public_key().unwrap();
+
+        
         
         Self {
             pk_sphincs: sphincs_keypair.0,
@@ -39,6 +50,13 @@ impl SigningKeypair {
             sig_ed25519: sig,
             sig_sphincs: sig_sphincs
         }
+    }
+    fn fingerprint(pk: SPHINCSPublicKey, sk: ED25519PublicKey) -> String {
+        let fingerprint = format!("{}{}", pk.to_hex_string().unwrap(), sk.to_hex_string());
+        let hasher = SlugBlake2bHasher::new(20);
+        let digest = hasher.hash(fingerprint.as_bytes());
+        let output = SlugDigest::from_bytes(&digest).unwrap();
+        return output.digest().to_string();
     }
 }
 
