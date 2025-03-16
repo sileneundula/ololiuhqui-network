@@ -2768,9 +2768,9 @@ dependencies = [
 
 [[package]]
 name = "libslug"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "69280021694190d1c39901ad69d06fecacb8e34edafd526fca18ef5ed701f8e5"
+checksum = "bcd72dd7bce92ccb02656544007cbb4c9121cc5a61337dadf94065189773a735"
 dependencies = [
  "aes-gcm",
  "argon2",
