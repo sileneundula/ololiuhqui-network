@@ -1,11 +1,12 @@
-pub struct PasteMDContents {
-    pub id: String,
-    pub author: String,
-    pub content: String,
-}
+use crate::wallet::naive::{SigningPublicKeys,Signature};
 
-impl PasteMDContents {
-    pub fn new(id: String, author: String, content: String) -> Self {
-        Self { id, author, content }
-    }
+pub struct PasteMDContents {
+    // Verification
+    pub publickeys: SigningPublicKeys,
+    pub signature: Signature,
+    pub integrity: String,
+    // Content
+    title: String,
+    content: String,
+    tags: Vec<String>,
 }
