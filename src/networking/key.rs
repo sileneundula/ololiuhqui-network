@@ -31,6 +31,9 @@ impl LiuhqiKeypair {
     pub fn keypair(&self) -> identity::Keypair {
         self.0.clone()
     }
+    pub fn from_keypair(keypair: identity::Keypair) -> Self {
+        Self(keypair)
+    }
 }
 
 /// # LiuhqiKeypairAlgorithms

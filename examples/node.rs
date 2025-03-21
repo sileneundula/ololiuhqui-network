@@ -13,9 +13,12 @@ async fn main() {
 
     println!("Peer Id: {}", peer_id.clone());
 
-    //let (response_sender, mut response_rcv) = mpsc::unbounded_channel();
+    let mut swarm: libp2p::Swarm<behaviour::OloliuhquiBehaviour> = ololiuhqui_network::networking::swarm::LiuhqSwarm::new(kp.clone());
+    println!("Swarm created");
+
 }
 
 fn generate_keypair() -> LiuhqiKeypair {
-    let keypair = ololiuhqui_network::networking::key::LiuhqiKeypair::generate_ed25519();
+    let keypair = ololiuhqui_network::networking::key::LiuhqiKeypair::generate_ecdsa();
+    return keypair
 }
