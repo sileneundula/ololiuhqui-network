@@ -13,20 +13,20 @@ use libp2p::PeerId;
 #[derive(NetworkBehaviour)]
 pub struct OloliuhquiBehaviour {
     // Relay
-    relay: relay::Behaviour,
+    pub relay: relay::Behaviour,
     // Identify Protocol
-    identify: identify::Behaviour,
+    pub identify: identify::Behaviour,
     // Ping Protocol
-    ping: ping::Behaviour,
+    pub ping: ping::Behaviour,
     // KAD
-    kad: kad::Behaviour<MemoryStore>,
+    pub kad: kad::Behaviour<MemoryStore>,
     // Rendezous
-    rendezous_server: rendezvous::server::Behaviour,
-    rendezous_client: rendezvous::client::Behaviour,
+    pub rendezous_server: rendezvous::server::Behaviour,
+    pub rendezous_client: rendezvous::client::Behaviour,
     // GossipSub
-    gossip: gossipsub::Behaviour,
+    pub gossip: gossipsub::Behaviour,
     // Floodsub
-    floodsub: floodsub::Floodsub,
+    pub floodsub: floodsub::Floodsub,
 }
 
 impl OloliuhquiBehaviour {
