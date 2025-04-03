@@ -82,6 +82,18 @@ impl Signature {
             return Ok(false)
         }
     }
+    pub fn verify_ed25519<T: AsRef<[u8]>>(self, data: T, pk: &SigningPublicKeys) -> std::result::Result<bool, Box<dyn std::error::Error>> {
+        let ed25519 = pk.pk_ed25519.verify(self.sig_ed25519, data.as_ref())?;
+
+        let id = SigningKeypair::fingerprint(&pk.pk_sphincs, &pk.pk_ed25519);
+
+        if id == pk.id && ed25519 == true {
+            return Ok(true)
+        }
+        else {
+            return Ok(false)
+        }
+    }
 }
 
 impl SigningPublicKeys {

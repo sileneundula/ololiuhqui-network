@@ -13,12 +13,16 @@ pub struct EhdredLatticeInit {
     pk: SigningPublicKeys,
     sig: Signature,
 
+    address: address::EhdredAddress,
+
     keypairs: Vec<SigningPublicKeys>,
 }
 
 pub struct Block {
     id: u64,
     prev_hash: LinkedHash,
+
+    owner: address::EhdredAddress,
 
     address: address::EhdredAddress,
 
