@@ -18,9 +18,9 @@ pub struct SigningKeypair {
 
 #[derive(Debug,Serialize,Deserialize, Clone)]
 pub struct SigningPublicKeys {
-    pk_sphincs: SPHINCSPublicKey,
-    pk_ed25519: ED25519PublicKey,
-    id: String,
+    pub pk_sphincs: SPHINCSPublicKey,
+    pub pk_ed25519: ED25519PublicKey,
+    pub id: String,
 }
 
 #[derive(Debug,Serialize,Deserialize)]
@@ -63,6 +63,9 @@ impl SigningKeypair {
         let output = SlugDigest::from_bytes(&digest).unwrap();
         return output.digest().to_string();
     }
+    pub fn to_signing_public_keys(&self) -> SigningPublicKeys {
+        return SigningPublicKeys::new(self.pk_sphincs.clone(), self.pk_ed25519.clone())
+    }
 }
 
 impl Signature {
@@ -90,6 +93,18 @@ impl SigningPublicKeys {
             pk_ed25519,
             id: id,
         }
+    }
+    /// Returns AsBytes For PK + PK(SPHINCS)
+    pub fn to_vec(&self) -> Vec<u8> {
+        let mut output = vec![];
+        
+        let pk = self.pk_ed25519.as_bytes();
+        let pk_sphincs = self.pk_sphincs.as_bytes();
+
+        output.extend_from_slice(pk);
+        output.extend_from_slice(pk_sphincs);
+
+        return output
     }
 }
 

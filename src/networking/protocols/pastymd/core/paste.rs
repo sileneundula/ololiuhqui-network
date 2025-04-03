@@ -5,6 +5,7 @@ pub struct PasteMDContents {
     pub publickeys: SigningPublicKeys,
     pub signature: Signature,
     pub integrity: String,
+    
     // Content
     title: String,
     content: String,

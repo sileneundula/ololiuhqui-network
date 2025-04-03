@@ -14,3 +14,5 @@ pub mod protocols;
 
 /// Marketplace
 pub mod marketplace;
+
+pub mod ehdred_lattice;

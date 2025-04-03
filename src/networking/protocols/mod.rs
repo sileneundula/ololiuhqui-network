@@ -24,3 +24,5 @@ pub mod web;
 
 /// PastyMD
 pub mod pastymd;
+
+pub mod sentinel;
