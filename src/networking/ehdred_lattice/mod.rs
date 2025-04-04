@@ -5,6 +5,12 @@ type LinkedHash = String;
 
 pub mod address;
 
+pub struct EhdredRegistarInit {
+    id: u64,
+    service_name: String,
+    service_address: address::EhdredAddress,
+}
+
 pub struct EhdredLatticeInit {
     id: u64,
     common_name: String,
@@ -19,14 +25,24 @@ pub struct EhdredLatticeInit {
 }
 
 pub struct Block {
+    owner: address::EhdredAddress,
+
     id: u64,
     prev_hash: LinkedHash,
 
-    owner: address::EhdredAddress,
+    
 
     address: address::EhdredAddress,
 
     // Crypto
     keys: SigningPublicKeys,
 
+}
+
+pub struct Transaction {
+    id: u64,
+    from: address::EhdredAddress,
+    to: address::EhdredAddress,
+    amount: u64,
+    sig: Signature,
 }
