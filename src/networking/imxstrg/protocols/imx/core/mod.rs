@@ -15,9 +15,10 @@ pub struct ImxRequest {
 pub enum ImxAction {
     Request = 0,
     Response = 1,
-    RegisterRequest = 2,
+    
     
     // Register
+    RegisterRequest = 2,
     RegisterResponse = 3,
     RegisterError = 4,
     RegisterSuccess = 5,
