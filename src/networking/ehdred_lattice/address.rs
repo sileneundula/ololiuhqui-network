@@ -39,7 +39,9 @@ impl EhdredAddress {
     pub fn with_prefix(&self, prefix: &str) -> String {
         let mut address = String::new();
         address.push_str(prefix);
-        address.push_str()
+        address.push_str(prefix_address_char);
+        address.push_str(&self.0);
+        address
     }
     pub fn with_subgroup(&self, subgroup: &str) -> String {
         let mut address = String::new();
@@ -53,7 +55,6 @@ impl EhdredAddress {
 impl EhdredAddressBuilder {
     pub fn new() -> Self {
         EhdredAddressBuilder {
-            protocol: String::new(), /// protocol [xxx]
             prefix: String::new(), /// prefix (3-4 chars)
             subgroup: String::new(), /// subgroup (:) of prefix
             
@@ -95,6 +96,9 @@ fn create_ehdredaddress() {
 
     let address = EhdredAddress::from_keypair(spk);
 
+    let address_prefixed = address.with_prefix("ehdred");
+
     println!("Address: {}", address.as_str());
+    println!("Address with prefix: {}", address_prefixed);
 
 }

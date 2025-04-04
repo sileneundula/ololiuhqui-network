@@ -4,6 +4,7 @@ use crate::wallet::naive::Signature;
 type LinkedHash = String;
 
 pub mod address;
+pub mod services;
 
 pub struct EhdredRegistarInit {
     id: u64,

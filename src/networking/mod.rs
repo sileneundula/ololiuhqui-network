@@ -17,7 +17,6 @@ pub mod marketplace;
 
 pub mod ehdred_lattice;
 
-pub mod subprojects;
 
 /// Addressing (Ehdred) 
 /// PROTO: [Ehdred]::[Request]
