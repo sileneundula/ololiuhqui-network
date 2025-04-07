@@ -116,6 +116,5 @@ pub enum LiuhqEvents {
     /// Event for a new group member response
     NewGroupMemberResponse(LiuhqEvent),
     /// Event for a new group member notification
-    NewGroup,
     MemberNotification(LiuhqEvent),
 }

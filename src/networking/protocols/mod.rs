@@ -26,3 +26,5 @@ pub mod web;
 pub mod pastymd;
 
 pub mod sentinel;
+
+pub mod sroute;
