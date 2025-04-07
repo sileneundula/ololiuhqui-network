@@ -26,3 +26,5 @@ pub mod ehdred_lattice;
 /// ADDRESS: addr::ehdred_3FED429A510BA83B7E472E5D960F233DFCF28EB031BFD3405CBEA5FC
 /// SUFFIX: ?
 pub mod addressing;
+
+pub mod events;
