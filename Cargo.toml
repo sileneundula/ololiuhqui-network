@@ -12,6 +12,10 @@ futures = "0.3"
 async-std = "1.13.0"
 async-trait = "0.1.51"
 
+# Consensus
+paxakos = "0.13"
+
+
 # Markdown
 markdown = "1.0.0-alpha.22"
 

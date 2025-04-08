@@ -28,3 +28,5 @@ pub mod ehdred_lattice;
 pub mod addressing;
 
 pub mod events;
+
+pub mod storage;

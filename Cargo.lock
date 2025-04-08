@@ -1958,6 +1958,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "instant"
+version = "0.1.13"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e0242819d153cba4b4b05a5a8f2a7e9bbf97b6055b2a002b395c96b5ff3c0222"
+dependencies = [
+ "cfg-if",
+]
+
+[[package]]
 name = "ipconfig"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3210,6 +3219,7 @@ dependencies = [
  "libslug",
  "log",
  "markdown",
+ "paxakos",
  "serde",
  "serde_json",
  "tokio",
@@ -3290,6 +3300,24 @@ name = "paste"
 version = "1.0.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "57c0d7b74b563b49d38dae00a0c37d4d6de9b432382b2892f0574ddcae73fd0a"
+
+[[package]]
+name = "paxakos"
+version = "0.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "74de017293cf1de1b10d3b852acc347c255ad0a9347a7ce4e485ac4fcff55e53"
+dependencies = [
+ "futures",
+ "futures-timer",
+ "instant",
+ "num-traits",
+ "pin-project",
+ "serde",
+ "smallvec",
+ "snarc",
+ "thiserror 1.0.69",
+ "tracing",
+]
 
 [[package]]
 name = "pbkdf2"
@@ -4280,6 +4308,15 @@ dependencies = [
  "async-process",
  "blocking",
  "futures-lite",
+]
+
+[[package]]
+name = "snarc"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "86139386a5d6f6943239b0ce483b10a730981060055b77fb7b0c657a1119de7c"
+dependencies = [
+ "scopeguard",
 ]
 
 [[package]]
