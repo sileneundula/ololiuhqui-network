@@ -1,4 +1,4 @@
-use libp2p::{core, identity, noise, tcp, websocket, yamux, PeerId, Transport};
+use libp2p::{core, identity::{self, DecodingError, KeyType}, noise, tcp, websocket, yamux, PeerId, Transport};
 
 
 pub struct LiuhqiKeypair(identity::Keypair);
@@ -28,11 +28,20 @@ impl LiuhqiKeypair {
 
         return Self(keypair)
     }
+    pub fn to_protobuf(&self) -> Result<Vec<u8>, DecodingError> {
+        self.0.to_protobuf_encoding()
+    }
+    pub fn from_protobuf(&self, bytes: &[u8]) -> Result<identity::Keypair, DecodingError> {
+        identity::Keypair::from_protobuf_encoding(bytes)
+    }
     pub fn keypair(&self) -> identity::Keypair {
         self.0.clone()
     }
     pub fn from_keypair(keypair: identity::Keypair) -> Self {
         Self(keypair)
+    }
+    pub fn keypair_type(&self) -> KeyType {
+        self.0.key_type()
     }
 }
 
