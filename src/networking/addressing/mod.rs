@@ -23,12 +23,12 @@ pub struct LiuhqAddressBuilder {
 }
 
 impl LiuhqAddressBuilder {
-    pub fn new(protocol: String, protocol_subgroup: Option<Vec<String>>, prefix:) -> Self {
+    pub fn new(protocol: String, protocol_subgroup: Option<Vec<String>>) -> Self {
         LiuhqAddressBuilder {
             protocol: String::from("liuhq"),
             protocol_subgroup: None,
             prefix: String::new(),
-            subgroup: String::new(),
+            subgroup: Some(vec![String::new()]),
             
             suffix: String::new(),
             action: String::new(),

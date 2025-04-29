@@ -1,6 +1,15 @@
-use libp2p::request_response::{RequestResponse, ProtocolSupport, RequestResponseCodec, RequestResponseEvent, RequestResponseMessage};
-use libp2p::swarm::{NetworkBehaviour, Swarm};
+use libp2p::core::upgrade::{InboundUpgrade, OutboundUpgrade, NegotiationError};
+use libp2p::core::UpgradeInfo;
+use std::{io, iter};
 
-pub struct LiuhqMarket {
-    pub protocol: RequestResponse<LiuhqMarketCodec>,
+#[derive(Debug, Clone)]
+pub struct LiuhqMarketProto;
+
+impl UpgradeInfo for LiuhqMarketProto {
+    type Info = &'static str;
+    type InfoIter = iter::Once<Self::Info>;
+
+    fn protocol_info(&self) -> Self::InfoIter {
+        iter::once("/liuhqmarket/1.0.0")
+    }
 }

@@ -1,9 +1,21 @@
 pub mod core;
 
-use libp2p::request_response::{RequestResponseCodec, RequestResponse, UpgradeInfo};
+use libp2p::request_response::{Codec as RequestResponseCodec};
+use libp2p::core::upgrade::{InboundUpgrade, OutboundUpgrade, NegotiationError};
+use libp2p::core::UpgradeInfo;
+use async_trait::async_trait;
+//use tokio::io::{AsyncRead, AsyncWrite, AsyncReadExt, AsyncWriteExt};
+use futures::io::{AsyncRead,AsyncWrite,AsyncWriteExt,AsyncReadExt};
+use futures::io;
 
 #[derive(Clone)]
-pub struct KeyServiceProtocol();
+pub struct KeyServiceProtocol;
+
+impl AsRef<str> for KeyServiceProtocol {
+    fn as_ref(&self) -> &str {
+        "/keyservice/1.0.0"
+    }
+}
 
 #[derive(Debug, Clone)]
 pub struct KeyServiceRequest(pub String); // e.g., "/index.html"
@@ -24,34 +36,34 @@ impl RequestResponseCodec for KeyServiceCodec {
     where T: AsyncRead + Unpin + Send {
         let mut buf = Vec::new();
         io.read_to_end(&mut buf).await?;
-        Ok(StaticRequest(String::from_utf8_lossy(&buf).to_string()))
+        Ok(KeyServiceRequest(String::from_utf8_lossy(&buf).to_string()))
     }
 
     async fn read_response<T>(&mut self, _: &Self::Protocol, io: &mut T) -> io::Result<KeyServiceResponse>
     where T: AsyncRead + Unpin + Send {
         let mut buf = Vec::new();
         io.read_to_end(&mut buf).await?;
-        Ok(StaticResponse(buf))
+        Ok(KeyServiceResponse(buf))
     }
 
-    async fn write_request<T>(&mut self, _: &Self::Protocol, io: &mut T, StaticRequest(path): KeyServiceRequest) -> io::Result<()>
+    async fn write_request<T>(&mut self, _: &Self::Protocol, io: &mut T, KeyServiceRequest(path): KeyServiceRequest) -> io::Result<()>
     where T: AsyncWrite + Unpin + Send {
         io.write_all(path.as_bytes()).await?;
         io.close().await
     }
 
-    async fn write_response<T>(&mut self, _: &Self::Protocol, io: &mut T, StaticResponse(data): KeyServiceResponse) -> io::Result<()>
+    async fn write_response<T>(&mut self, _: &Self::Protocol, io: &mut T, KeyServiceResponse(data): KeyServiceResponse) -> io::Result<()>
     where T: AsyncWrite + Unpin + Send {
         io.write_all(&data).await?;
         io.close().await
     }
 }
 
-impl UpgradeInfo for StaticProtocol {
-    type Info = &'static [u8];
+impl UpgradeInfo for KeyServiceProtocol {
+    type Info = &'static str;
     type InfoIter = std::iter::Once<Self::Info>;
 
     fn protocol_info(&self) -> Self::InfoIter {
-        std::iter::once(b"/keyservice/1.0.0")
+        std::iter::once("/keyservice/1.0.0")
     }
 }

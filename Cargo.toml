@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 libp2p = { version = "0.55.0", features = ["full"] }
-tokio = { version = "1.43.0", features = ["full"] }
+tokio = { version = "1.44.2", features = ["full"] }
 serde = {version = "=1.0", features = ["derive"] }
 serde_json = "1.0"
 futures = "0.3"
@@ -14,6 +14,7 @@ async-trait = "0.1.51"
 
 # Consensus
 paxakos = "0.13"
+blake2b-pow = "0.1.1"
 
 
 # Markdown
@@ -24,4 +25,4 @@ log = "0.4.14"
 env_logger = "0.9.0"
 
 # Slug
-libslug = "0.3.1"
+libslug = "0.3.2"
