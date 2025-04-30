@@ -6,3 +6,7 @@
 pub mod kv_bucket;
 
 pub mod bucket;
+
+pub mod strgtrait;
+
+pub mod strgaddr;

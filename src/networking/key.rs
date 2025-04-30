@@ -1,7 +1,30 @@
 use libp2p::{core, identity::{self, DecodingError, KeyType}, noise, tcp, websocket, yamux, PeerId, Transport};
+use serde::{Serialize,Deserialize};
+use pkcs8::EncodePrivateKey;
 
-
+#[derive(Debug, Clone)]
 pub struct LiuhqiKeypair(identity::Keypair);
+
+impl Serialize for LiuhqiKeypair {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: serde::Serializer {
+        match self.to_protobuf() {
+            Ok(bytes) => serializer.serialize_bytes(&bytes),
+            Err(e) => Err(serde::ser::Error::custom(e)),
+        }
+    }
+}
+
+impl<'de> Deserialize<'de> for LiuhqiKeypair {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let bytes: Vec<u8> = Deserialize::deserialize(deserializer)?;
+        let keypair = identity::Keypair::from_protobuf_encoding(&bytes)
+            .map_err(serde::de::Error::custom)?;
+        Ok(LiuhqiKeypair(keypair))
+    }
+}
 
 impl LiuhqiKeypair {
     pub fn generate(algorithm: LiuhqiKeypairAlgorithms) -> Self {
