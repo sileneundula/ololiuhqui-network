@@ -5,11 +5,11 @@ edition = "2021"
 
 [dependencies]
 libp2p = { version = "0.55.0", features = ["full"] }
-tokio = { version = "1.44.2", features = ["full"] }
+tokio = { version = "1.45.1", features = ["full"] }
 serde = {version = "=1.0", features = ["derive"] }
 serde_json = "1.0"
 futures = "0.3"
-async-std = "1.13.0"
+async-std = "1.13.1"
 async-trait = "0.1.51"
 
 # Consensus
@@ -21,11 +21,11 @@ pkcs8 = "0.10.2"
 
 
 # Markdown
-markdown = "1.0.0-alpha.22"
+markdown = "1.0.0"
 
 # Logging
-log = "0.4.14"
-env_logger = "0.9.0"
+log = "0.4.27"
+env_logger = "0.11.8"
 
 # Slug
 libslug = "0.3.2"
